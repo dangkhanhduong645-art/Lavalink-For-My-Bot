@@ -1,0 +1,41 @@
+server:
+  port: ${PORT:2333}
+  address: 0.0.0.0
+
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
+      snapshot: false
+
+  server:
+    password: "${LAVALINK_PASSWORD}" # set via env var, do NOT hardcode/commit a real password
+    sources:
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      http: true # warning: direct HTTP streaming without a proxy can expose this server's IP
+      local: false
+
+    bufferDurationMs: 400
+    playerUpdateInterval: 5
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - WEB
+      - ANDROID_MUSIC
+      - TV
+    oauth:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
+    dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO
